@@ -10,10 +10,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 @Slf4j
 @Configuration
+@PropertySource("/application-quartz.properties")
 @Profile("application-quartz")
 @ConditionalOnExpression("'${using.spring.schedulerFactory}'=='false'")
 class QuartzStdScheduler {
