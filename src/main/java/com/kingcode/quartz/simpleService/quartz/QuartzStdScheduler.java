@@ -16,7 +16,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @Configuration
 @Profile("application-quartz")
 @ConditionalOnExpression("'${using.spring.schedulerFactory}'=='false'")
-class QuartzStdSchedulerFactory {
+class QuartzStdScheduler {
 
     @Bean
     public Scheduler scheduler(
@@ -24,9 +24,10 @@ class QuartzStdSchedulerFactory {
         @Qualifier("jobDetail of Quartz") JobDetail job,
         SchedulerFactoryBean factory
     ) throws SchedulerException {
-        log.info("Quartz Scheduler");
+        log.debug("Getting a handle to the Scheduler");
         Scheduler scheduler = factory.getScheduler();
         scheduler.scheduleJob(job, trigger);
+        log.debug("Starting Scheduler threads");
         scheduler.start();
         return scheduler;
     }

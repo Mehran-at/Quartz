@@ -14,7 +14,7 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 @Slf4j
 @Configuration
 @Profile("application-quartz")
-class QuartzTriggerBuilder {
+class QuartzTrigger {
 
     @Bean("Trigger of Quartz")
     public Trigger trigger(@Qualifier("jobDetail of Quartz") JobDetail job) {

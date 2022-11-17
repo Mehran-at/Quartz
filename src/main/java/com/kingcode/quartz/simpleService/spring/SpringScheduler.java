@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 @Configuration
 @ConditionalOnExpression("'${using.spring.schedulerFactory}'=='true'")
 @Profile("application.properties")
-class SpringSchedulerFactoryBean {
+class SpringScheduler {
     @Autowired
     private ApplicationContext applicationContext;
 
@@ -32,9 +32,11 @@ class SpringSchedulerFactoryBean {
     ) {
         SchedulerFactoryBean schedulerFactoryBean = new SchedulerFactoryBean();
         schedulerFactoryBean.setConfigLocation(new ClassPathResource("application.properties"));
+        log.debug("Setting the Scheduler up");
         schedulerFactoryBean.setJobFactory(springBeanJobFactory());
         schedulerFactoryBean.setJobDetails(job);
         schedulerFactoryBean.setTriggers(trigger);
+        // Comment the following line to use the default Quartz job store.
         schedulerFactoryBean.setDataSource(quartzDataSource);
         log.info("Spring scheduler factory");
         return schedulerFactoryBean;
@@ -43,6 +45,7 @@ class SpringSchedulerFactoryBean {
     @Bean
     public SpringBeanJobFactory springBeanJobFactory() {
         AutoWiringSpringBeanJobFactory jobFactory = new AutoWiringSpringBeanJobFactory();
+        log.debug("Configuring Job factory");
         jobFactory.setApplicationContext(applicationContext);
         return jobFactory;
     }

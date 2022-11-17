@@ -12,15 +12,16 @@ import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 @Slf4j
 @Configuration
 @Profile("application.properties")
-class SpringSimpleTriggerFactoryBean {
+class SpringTrigger {
 
     @Bean("Trigger of SimpleTriggerFactoryBean")
     public SimpleTriggerFactoryBean trigger(@Qualifier("jobDetailOfJobDetailFactoryBean") JobDetail job) {
+        int frequencyInSec = 10;
         SimpleTriggerFactoryBean trigger = new SimpleTriggerFactoryBean();
         trigger.setJobDetail(job);
-        trigger.setRepeatInterval(3600000);
+        log.info("Configuring trigger to fire every {} seconds", frequencyInSec);
+        trigger.setRepeatInterval(frequencyInSec * 1000);
         trigger.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
-        log.info("Spring trigger");
         return trigger;
     }
 }

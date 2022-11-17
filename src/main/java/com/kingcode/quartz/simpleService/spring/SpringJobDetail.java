@@ -10,7 +10,7 @@ import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 @Slf4j
 @Configuration
 @Profile("application.properties")
-class SpringJobDetailFactoryBeanConfig {
+class SpringJobDetail {
 
     @Bean("jobDetailOfJobDetailFactoryBean")
     public JobDetailFactoryBean jobDetail() {

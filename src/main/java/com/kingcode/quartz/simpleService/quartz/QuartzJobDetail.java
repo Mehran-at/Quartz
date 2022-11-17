@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Profile;
 @Slf4j
 @Configuration
 @Profile("application-quartz")
-class QuartzJobDetailConfig {
+class QuartzJobDetail {
 
     @Bean("jobDetail of Quartz")
     public JobDetail jobDetail() {
