@@ -16,7 +16,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 @Configuration
 @Profile("application-quartz")
 @ConditionalOnExpression("'${using.spring.schedulerFactory}'=='false'")
-public class QuartzStdSchedulerFactory {
+class QuartzStdSchedulerFactory {
 
     @Bean
     public Scheduler scheduler(
